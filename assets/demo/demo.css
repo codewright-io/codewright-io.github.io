@@ -623,3 +623,10 @@
     display: none !important;
   }
 }
+
+.skill-icon {
+    font-size: 20px;
+    padding: 14px;
+    border: solid 1px;
+    border-radius: 50% !important;
+}
