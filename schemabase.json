@@ -1,0 +1,57 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Schemacat base",
+    "description": "Schemacat base schema",
+    "contact": {
+      "name": "Code Wright",
+      "url": "https://codewright.io/",
+      "email": "admin@codewright.io"
+    },
+    "version": "v1",
+    "x-logo": {
+      "url": "https://raw.githubusercontent.com/codewright-io/tagcat/main/tagcat_sml.png",
+      "altText": "Logo"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Base": {
+        "type": "object",
+        "required": [ "$id" ],
+        "properties": {
+          "$id": {
+            "type": "string"
+          },
+          "$name": {
+            "type": "string"
+          },
+          "$description": {
+            "type": "string"
+          },
+          "$iconUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "stackTrace": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
