@@ -1,0 +1,3193 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Tagcat",
+    "description": "## Overview\r\n\r\nThe Tagcat service provides a light-weight, scalable service to store metadata and tag information about objects inside your application.\r\n\r\nIt supports storing three types of information about objects or items in a system:\r\n\r\n1. Metadata - Short key/value information to attach to an item\r\n2. Tag - Tagging or labeling an item\r\n3. Relationships - Links, references, or relationships between items\r\n",
+    "contact": {
+      "name": "Code Wright",
+      "url": "https://codewright.io/",
+      "email": "admin@codewright.io"
+    },
+    "license": {
+      "name": "License",
+      "url": "https://raw.githubusercontent.com/codewright-io/tagcat/main/LICENSE"
+    },
+    "version": "v1",
+    "x-logo": {
+      "url": "https://raw.githubusercontent.com/codewright-io/tagcat/main/tagcat_sml.png",
+      "altText": "Logo"
+    }
+  },
+  "paths": {
+    "/api/items/metadata/v1": {
+      "post": {
+        "tags": [
+          "ItemMetadata"
+        ],
+        "summary": "Set all the metadata on an item, replacing any existing metadata",
+        "requestBody": {
+          "description": "The set metadata command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemMetadataSetCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemMetadataSetCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemMetadataSetCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/metadata/v1/add": {
+      "post": {
+        "tags": [
+          "ItemMetadata"
+        ],
+        "summary": "Add metadata to an item, ignoring any that already exist",
+        "requestBody": {
+          "description": "The add metadata command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemMetadataAddCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemMetadataAddCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemMetadataAddCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/metadata/v1/remove": {
+      "post": {
+        "tags": [
+          "ItemMetadata"
+        ],
+        "summary": "Remove the specified metadata from an item",
+        "requestBody": {
+          "description": "The remove metadata command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemMetadataRemoveCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemMetadataRemoveCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemMetadataRemoveCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/metadata/v1/{tenantId}/{id}": {
+      "get": {
+        "tags": [
+          "ItemMetadata"
+        ],
+        "summary": "Fetch the metadata on an item",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The tenant ID for the item",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the item",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MetadataEntry"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MetadataEntry"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MetadataEntry"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/metadata/v1/search/{tenantId}": {
+      "get": {
+        "tags": [
+          "ItemMetadata"
+        ],
+        "summary": "Search for items with the specified metadata name and values.",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The ID of the tenant to search",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The metadata name to match",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "value",
+            "in": "query",
+            "description": "The metadata value to match",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "secondaryName",
+            "in": "query",
+            "description": "An optional secondary name to match",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "secondaryValue",
+            "in": "query",
+            "description": "An optional secondary value to match",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The maximum number of results to return",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "An offset used to paginate results",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemResult"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemResult"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemResult"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/relationships/v1": {
+      "post": {
+        "tags": [
+          "ItemRelationships"
+        ],
+        "summary": "Set all the relationships on an item, replacing any existing relationships",
+        "requestBody": {
+          "description": "The set relationships command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemRelationshipsSetCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemRelationshipsSetCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemRelationshipsSetCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/relationships/v1/add": {
+      "post": {
+        "tags": [
+          "ItemRelationships"
+        ],
+        "summary": "Add relationships for an item, ignoring any that already exist",
+        "requestBody": {
+          "description": "The add relationships command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemRelationshipsAddCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemRelationshipsAddCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemRelationshipsAddCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/relationships/v1/remove": {
+      "post": {
+        "tags": [
+          "ItemRelationships"
+        ],
+        "summary": "Remove the specified relationships from an item",
+        "requestBody": {
+          "description": "The remove relationships command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemRelationshipsRemoveCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemRelationshipsRemoveCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemRelationshipsRemoveCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/relationships/v1/{tenantId}/{id}": {
+      "get": {
+        "tags": [
+          "ItemRelationships"
+        ],
+        "summary": "Fetch the relationships on an item",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The tenant ID for the item",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the item",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RelationshipEntry"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RelationshipEntry"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RelationshipEntry"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/relationships/v1/referencing/{tenantId}/{targetId}": {
+      "get": {
+        "tags": [
+          "ItemRelationships"
+        ],
+        "summary": "Search for items relationships this ID.",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The ID of the tenant to search",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "targetId",
+            "in": "path",
+            "description": "The item to match relationships for",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The maximum number of results to return",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "An offset used to paginate results",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemResult"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemResult"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemResult"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/v1": {
+      "post": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Set all the metadata and relationships on an item, replacing any existing metadata and relationships",
+        "requestBody": {
+          "description": "The set relationships command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemSetAllCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemSetAllCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemSetAllCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Remove all the metadata and relationships on an item",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "query",
+            "description": "The tenant ID for the item",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The ID of the item",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/v1/{tenantId}/{id}": {
+      "get": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Fetch an item's metadata and relationships",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The tenant ID for the item",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the item",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/v1/events/{tenantId}/{id}": {
+      "get": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Fetch an item's event audit trail",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The tenant ID for the item",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the item",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromVersion",
+            "in": "query",
+            "description": "The version to start from. Omit to start from the beginning.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The maximum number of events to fetch",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IDomainEvent"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IDomainEvent"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IDomainEvent"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/tags/v1": {
+      "post": {
+        "tags": [
+          "ItemTags"
+        ],
+        "summary": "Set all the tags on an item, replacing any existing tags",
+        "requestBody": {
+          "description": "The set tags command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemTagsSetCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemTagsSetCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemTagsSetCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/tags/v1/add": {
+      "post": {
+        "tags": [
+          "ItemTags"
+        ],
+        "summary": "Add tags for an item",
+        "requestBody": {
+          "description": "The add tags command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemTagsAddCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemTagsAddCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemTagsAddCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/tags/v1/remove": {
+      "post": {
+        "tags": [
+          "ItemTags"
+        ],
+        "summary": "Remove the specified tags from an item",
+        "requestBody": {
+          "description": "The remove tags command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemTagsRemoveCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemTagsRemoveCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemTagsRemoveCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/tags/v1/{tenantId}/{id}": {
+      "get": {
+        "tags": [
+          "ItemTags"
+        ],
+        "summary": "Fetch the tags on an item",
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "query",
+            "description": "An optional two letter ISO culture to fetch the tags for",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The tenant ID for the item",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the item",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemTagViewEntry"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemTagViewEntry"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemTagViewEntry"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/tags/v1/search/{tenantId}": {
+      "get": {
+        "tags": [
+          "ItemTags"
+        ],
+        "summary": "Fetch the items with a matching tag",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The tenant ID for the item",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "culture",
+            "in": "query",
+            "description": "An optional two letter ISO culture to fetch the tags for",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "description": "The tag to search for",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "An optional type to filter on",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The maximum number of results to return",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "An offset used to paginate results",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemResult"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemResult"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemResult"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CommandResult": {
+        "required": [
+          "id",
+          "version"
+        ],
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "stackTrace": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IDomainEvent": {
+        "required": [
+          "id",
+          "tenantId",
+          "time",
+          "typeId",
+          "version"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "readOnly": true
+          },
+          "tenantId": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "readOnly": true
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "sourceId": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "userId": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "typeId": {
+            "minLength": 1,
+            "type": "string",
+            "readOnly": true
+          },
+          "version": {
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "eventClass": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemMetadataAddCommand": {
+        "required": [
+          "id",
+          "metadata",
+          "tenantId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Unique identifier for the object",
+            "example": "A_Midsummer_Nights_Dream"
+          },
+          "tenantId": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Tenant Id for the object",
+            "example": "William_Shakespeare"
+          },
+          "metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetadataEntry"
+            },
+            "description": "A key/value list of metadata properties on the object."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Command to add metadata to an item."
+      },
+      "ItemMetadataRemoveCommand": {
+        "required": [
+          "id",
+          "metadata",
+          "tenantId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Unique identifier for the object",
+            "example": "A_Midsummer_Nights_Dream"
+          },
+          "tenantId": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Tenant Id for the object",
+            "example": "William_Shakespeare"
+          },
+          "metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetadataEntry"
+            },
+            "description": "A key/value list of metadata properties on the object."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Command to remove existing metadata from an item."
+      },
+      "ItemMetadataSetCommand": {
+        "required": [
+          "id",
+          "tenantId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Unique identifier for the object",
+            "example": "A_Midsummer_Nights_Dream"
+          },
+          "tenantId": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Tenant Id for the object",
+            "example": "William_Shakespeare"
+          },
+          "metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetadataEntry"
+            },
+            "description": "A list of metadata properties on the item.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Command to set metadata on an item, replacing existing metadata."
+      },
+      "ItemRelationshipsAddCommand": {
+        "required": [
+          "id",
+          "relationships",
+          "tenantId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Unique identifier for the object",
+            "example": "A_Midsummer_Nights_Dream"
+          },
+          "tenantId": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Tenant Id for the object",
+            "example": "William_Shakespeare"
+          },
+          "relationships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelationshipEntry"
+            },
+            "description": "A list of references or relationships that the object has to other objects."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Command to add relationships from one item to others."
+      },
+      "ItemRelationshipsRemoveCommand": {
+        "required": [
+          "id",
+          "relationships",
+          "tenantId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Unique identifier for the object",
+            "example": "A_Midsummer_Nights_Dream"
+          },
+          "tenantId": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Tenant Id for the object",
+            "example": "William_Shakespeare"
+          },
+          "relationships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelationshipEntry"
+            },
+            "description": "A list of references or relationships to remove."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Command to remove existing relationships between this item and others."
+      },
+      "ItemRelationshipsSetCommand": {
+        "required": [
+          "id",
+          "tenantId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Unique identifier for the object",
+            "example": "A_Midsummer_Nights_Dream"
+          },
+          "tenantId": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Tenant Id for the object",
+            "example": "William_Shakespeare"
+          },
+          "relationships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelationshipEntry"
+            },
+            "description": "A list of references or relationships that the object has to other objects.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Command to set relationships between this item and others, replacing all existing relationships."
+      },
+      "ItemResult": {
+        "required": [
+          "id",
+          "tenantId",
+          "version"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Unique identifier for the object",
+            "example": "A_Midsummer_Nights_Dream"
+          },
+          "tenantId": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Tenant Id for the object",
+            "example": "William_Shakespeare"
+          },
+          "version": {
+            "type": "integer",
+            "description": "Version of the object",
+            "format": "int64",
+            "example": 123456
+          },
+          "relationships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelationshipEntry"
+            },
+            "description": "A list of references or relationships that the object has to other objects.",
+            "nullable": true
+          },
+          "metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetadataEntry"
+            },
+            "description": "A key/value list of metadata properties on the object.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Item result for search queries"
+      },
+      "ItemSetAllCommand": {
+        "required": [
+          "id",
+          "tenantId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Unique identifier for the object",
+            "example": "A_Midsummer_Nights_Dream"
+          },
+          "tenantId": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Tenant Id for the object",
+            "example": "William_Shakespeare"
+          },
+          "metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetadataEntry"
+            },
+            "description": "A key/value list of metadata properties on the object.",
+            "nullable": true
+          },
+          "relationships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelationshipEntry"
+            },
+            "description": "A list of references or relationships that the object has to other objects.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Command to set all metadata and relationships on an item, replacing the existing metadata and relationships."
+      },
+      "ItemTagViewEntry": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The Tag ID",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "description": "The tag display name",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "An item tag entry"
+      },
+      "ItemTagsAddCommand": {
+        "required": [
+          "id",
+          "tags",
+          "tenantId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Unique identifier for the object",
+            "example": "A_Midsummer_Nights_Dream"
+          },
+          "tenantId": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Tenant Id for the object",
+            "example": "William_Shakespeare"
+          },
+          "culture": {
+            "type": "string",
+            "description": "Culture of the tags",
+            "nullable": true,
+            "readOnly": true,
+            "example": "en"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of tags to add.",
+            "example": [
+              "Comedy",
+              "Romance"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "description": "Command to add tags to an item."
+      },
+      "ItemTagsRemoveCommand": {
+        "required": [
+          "id",
+          "tags",
+          "tenantId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Unique identifier for the object",
+            "example": "A_Midsummer_Nights_Dream"
+          },
+          "tenantId": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Tenant Id for the object",
+            "example": "William_Shakespeare"
+          },
+          "culture": {
+            "type": "string",
+            "description": "Culture of the tags",
+            "nullable": true,
+            "readOnly": true,
+            "example": "en"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of tags to remove.",
+            "example": [
+              "Comedy",
+              "Romance"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "description": "Command to remove existing tags from an item."
+      },
+      "ItemTagsSetCommand": {
+        "required": [
+          "id",
+          "tenantId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Unique identifier for the object",
+            "example": "A_Midsummer_Nights_Dream"
+          },
+          "tenantId": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "description": "Tenant Id for the object",
+            "example": "William_Shakespeare"
+          },
+          "culture": {
+            "type": "string",
+            "description": "Culture of the tags",
+            "nullable": true,
+            "readOnly": true,
+            "example": "en"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of tag data on the object.",
+            "nullable": true,
+            "example": [
+              "Comedy",
+              "Romance"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "description": "Command to set tags on an item, replacing all existing tags."
+      },
+      "MetadataEntry": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The name or key for the metadata information",
+            "example": "Year"
+          },
+          "value": {
+            "type": "string",
+            "description": "The value of the metadata information",
+            "nullable": true,
+            "example": "1596"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Metadata information on an item"
+      },
+      "RelationshipEntry": {
+        "required": [
+          "targetId"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/RelationshipType"
+          },
+          "targetId": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The target ID of the relationship",
+            "example": "Comedy"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Relationship information on an item"
+      },
+      "RelationshipType": {
+        "enum": [
+          "Undefined",
+          "ChildOf",
+          "AliasOf",
+          "EquivalentTo",
+          "RelatedTo",
+          "SubcategoryOf",
+          "TranslationOf",
+          "Tag"
+        ],
+        "type": "string",
+        "description": "The type of relationship<p>Possible values:</p>\r\n<ul>\r\n<li><b>Undefined</b>: No relationship type specified. Do not use.</li>\r\n<li><b>ChildOf</b>: The item is a child of another item</li>\r\n<li><b>AliasOf</b>: The item is an alias of another item</li>\r\n<li><b>EquivalentTo</b>: The item is equivalent to another item</li>\r\n<li><b>RelatedTo</b>: The item is related to another item</li>\r\n<li><b>SubcategoryOf</b>: The item is a sub-category of another item</li>\r\n<li><b>TranslationOf</b>: The item is translation of another item</li>\r\n<li><b>Tag</b>: The item is a tag</li>\r\n</ul>\r\n"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    },
+    {
+      "name": "Items",
+      "description": "Item API"
+    },
+    {
+      "name": "ItemMetadata",
+      "description": "Item Metadata API"
+    },
+    {
+      "name": "ItemRelationships",
+      "description": "Item Relationship API"
+    },
+    {
+      "name": "ItemTags",
+      "description": "Item Tag API"
+    }
+  ]
+}
