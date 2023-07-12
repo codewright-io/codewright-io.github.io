@@ -1607,9 +1607,7 @@
             }
           }
         }
-      }
-    },
-    "/api/blob/v1/{typeid}/{id}": {
+      },
       "get": {
         "tags": [
           "JsonBlob"
@@ -1659,7 +1657,7 @@
         }
       }
     },
-    "/api/blob/v1/{typeid}": {
+    "/api/blob/v1/{typeId}": {
       "get": {
         "tags": [
           "JsonBlob"
