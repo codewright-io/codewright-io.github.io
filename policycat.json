@@ -1607,9 +1607,7 @@
             }
           }
         }
-      }
-    },
-    "/api/blob/v1/{typeid}/{id}": {
+      },
       "get": {
         "tags": [
           "JsonBlob"
@@ -1659,7 +1657,7 @@
         }
       }
     },
-    "/api/blob/v1/{typeid}": {
+    "/api/blob/v1/{typeId}": {
       "get": {
         "tags": [
           "JsonBlob"
@@ -1762,10 +1760,80 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              }
+            }
           },
           "404": {
             "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/policy/v1/bulk": {
+      "post": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Create a set of policies and policy targets.",
+        "requestBody": {
+          "description": "The create policies command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkPolicyCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkPolicyCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkPolicyCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1815,7 +1883,24 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad Request",
@@ -1866,7 +1951,24 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad Request",
@@ -2163,7 +2265,24 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              }
+            }
           },
           "404": {
             "description": "Not Found",
@@ -2191,6 +2310,29 @@
   },
   "components": {
     "schemas": {
+      "BulkPolicyCommand": {
+        "type": "object",
+        "properties": {
+          "policies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreatePolicyCommand"
+            },
+            "description": "",
+            "nullable": true
+          },
+          "targets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SetPolicyTargetCommand"
+            },
+            "description": "",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Command to bulk import policies and policy targets"
+      },
       "CommandResult": {
         "required": [
           "id",
@@ -2217,34 +2359,34 @@
             "description": "",
             "nullable": true
           },
-          "typeId": {
+          "tenantId": {
             "type": "string",
             "description": "",
             "nullable": true
           },
           "name": {
             "type": "string",
-            "description": "",
+            "description": "Name of the policy",
             "nullable": true
           },
           "description": {
             "type": "string",
-            "description": "",
+            "description": "Description of the policy",
             "nullable": true
           },
           "iconUrl": {
             "type": "string",
-            "description": "",
+            "description": "Icon for the policy",
             "nullable": true
           },
           "action": {
             "type": "string",
-            "description": "",
+            "description": "Action that the policy is for",
             "nullable": true
           },
           "actionResourceType": {
             "type": "string",
-            "description": "",
+            "description": "Resource type that the actions is for",
             "nullable": true
           },
           "parameters": {
@@ -2252,12 +2394,12 @@
             "items": {
               "$ref": "#/components/schemas/PolicyParameter"
             },
-            "description": "",
+            "description": "Parameters needed for action conditions",
             "nullable": true
           },
           "actionConditions": {
             "type": "string",
-            "description": "",
+            "description": "Conditions for the policy to pass",
             "nullable": true
           },
           "tags": {
@@ -2265,7 +2407,7 @@
             "items": {
               "type": "string"
             },
-            "description": "",
+            "description": "Tags for the policy",
             "nullable": true
           }
         },
@@ -2781,6 +2923,11 @@
       "RemovePolicyTargetCommand": {
         "type": "object",
         "properties": {
+          "tenantId": {
+            "type": "string",
+            "description": "The tenant",
+            "nullable": true
+          },
           "targetId": {
             "type": "string",
             "description": "The target object",
@@ -2803,11 +2950,16 @@
           }
         },
         "additionalProperties": false,
-        "description": "Remove a polcy from a targer item"
+        "description": "Remove a policy from a target item"
       },
       "SetPolicyTargetCommand": {
         "type": "object",
         "properties": {
+          "tenantId": {
+            "type": "string",
+            "description": "The tenant",
+            "nullable": true
+          },
           "targetId": {
             "type": "string",
             "description": "The target object",
@@ -2848,34 +3000,34 @@
             "description": "",
             "nullable": true
           },
-          "typeId": {
+          "tenantId": {
             "type": "string",
             "description": "",
             "nullable": true
           },
           "name": {
             "type": "string",
-            "description": "",
+            "description": "Name of the policy",
             "nullable": true
           },
           "description": {
             "type": "string",
-            "description": "",
+            "description": "Description of the policy",
             "nullable": true
           },
           "iconUrl": {
             "type": "string",
-            "description": "",
+            "description": "Icon for the policy",
             "nullable": true
           },
           "action": {
             "type": "string",
-            "description": "",
+            "description": "Action that the policy is for",
             "nullable": true
           },
           "actionResourceType": {
             "type": "string",
-            "description": "",
+            "description": "Resource type that the actions is for",
             "nullable": true
           },
           "parameters": {
@@ -2883,12 +3035,12 @@
             "items": {
               "$ref": "#/components/schemas/PolicyParameter"
             },
-            "description": "",
+            "description": "Parameters needed for action conditions",
             "nullable": true
           },
           "actionConditions": {
             "type": "string",
-            "description": "",
+            "description": "Conditions for the policy to pass",
             "nullable": true
           },
           "tags": {
@@ -2896,7 +3048,7 @@
             "items": {
               "type": "string"
             },
-            "description": "",
+            "description": "Tags for the policy",
             "nullable": true
           }
         },
