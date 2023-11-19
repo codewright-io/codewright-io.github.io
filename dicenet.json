@@ -631,7 +631,7 @@
             "type": "string",
             "nullable": true
           },
-          "registerUserId": {
+          "ownerId": {
             "type": "string",
             "nullable": true
           },
@@ -645,13 +645,15 @@
         "type": "object",
         "properties": {
           "id": {
-            "$ref": "#/components/schemas/ObjectId"
+            "type": "string",
+            "nullable": true
           },
           "dieType": {
             "$ref": "#/components/schemas/DieType"
           },
-          "userId": {
-            "$ref": "#/components/schemas/UserId"
+          "ownerId": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
