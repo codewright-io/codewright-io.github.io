@@ -111,6 +111,36 @@
         }
       }
     },
+    "/api/die/v1/{id}": {
+      "get": {
+        "tags": [
+          "Die"
+        ],
+        "operationId": "GetDieById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/roll/v1": {
       "post": {
         "tags": [
@@ -501,6 +531,36 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/user/v1/{id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "GetUserById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       }
