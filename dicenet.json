@@ -141,17 +141,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DieCreateCommand"
+                "$ref": "#/components/schemas/DeviceCreateCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/DieCreateCommand"
+                "$ref": "#/components/schemas/DeviceCreateCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/DieCreateCommand"
+                "$ref": "#/components/schemas/DeviceCreateCommand"
               }
             }
           }
@@ -1298,6 +1298,16 @@
           "id": {
             "minLength": 1,
             "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceCreateCommand": {
+        "type": "object",
+        "properties": {
+          "serialNumber": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
