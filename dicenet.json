@@ -335,6 +335,55 @@
         }
       }
     },
+    "/api/device/v1/owner": {
+      "patch": {
+        "tags": [
+          "Device"
+        ],
+        "operationId": "DeviceSetOwner",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceSetOwnerCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceSetOwnerCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceSetOwnerCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/die/v1": {
       "get": {
         "tags": [
@@ -1328,6 +1377,20 @@
             "nullable": true
           },
           "serialNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceSetOwnerCommand": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "ownerId": {
             "type": "string",
             "nullable": true
           }
