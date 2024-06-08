@@ -254,13 +254,6 @@
         "operationId": "GetMyDevices",
         "parameters": [
           {
-            "name": "userId",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "offset",
             "in": "query",
             "schema": {
@@ -564,13 +557,6 @@
         "operationId": "GetMyDice",
         "parameters": [
           {
-            "name": "userId",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "offset",
             "in": "query",
             "schema": {
@@ -792,6 +778,162 @@
         }
       }
     },
+    "/api/register/v1/serialnumber": {
+      "get": {
+        "tags": [
+          "Register"
+        ],
+        "operationId": "SerialNumber",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/register/v1": {
+      "get": {
+        "tags": [
+          "Register"
+        ],
+        "operationId": "DeviceRegisterStart",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Register"
+        ],
+        "operationId": "DeviceRegisterComplete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterCompleteCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterCompleteCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterCompleteCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CertificateResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CertificateResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CertificateResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/roll/v1/test": {
+      "post": {
+        "tags": [
+          "Roll"
+        ],
+        "operationId": "TestDice",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RollData"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RollData"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RollData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RollResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RollResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RollResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/roll/v1": {
       "post": {
         "tags": [
@@ -968,6 +1110,56 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/UnclassifiedDataEvent"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/train/v1/recent": {
+      "get": {
+        "tags": [
+          "Train"
+        ],
+        "operationId": "ListRecent",
+        "parameters": [
+          {
+            "name": "maxCount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TrainingEventDecorated"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TrainingEventDecorated"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TrainingEventDecorated"
                   }
                 }
               }
@@ -1510,6 +1702,24 @@
         },
         "additionalProperties": false
       },
+      "Position3d": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number",
+            "format": "double"
+          },
+          "y": {
+            "type": "number",
+            "format": "double"
+          },
+          "z": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
       "Reading": {
         "type": "object",
         "properties": {
@@ -1519,6 +1729,20 @@
           },
           "value": {
             "$ref": "#/components/schemas/Vector3d"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterCompleteCommand": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1582,103 +1806,122 @@
           },
           "channel0X": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel0Y": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel0Z": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel1X": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel1Y": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel1Z": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel2X": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel2Y": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel2Z": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel3X": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel3Y": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel3Z": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel4X": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel4Y": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel4Z": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel5X": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel5Y": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel5Z": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel6X": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel6Y": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel6Z": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel7X": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel7Y": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "channel7Z": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "classification": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TrainingEventDecorated": {
+        "type": "object",
+        "properties": {
+          "typeId": {
+            "$ref": "#/components/schemas/TypeId"
+          },
+          "offsets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Reading"
+            },
+            "nullable": true
+          },
+          "position": {
+            "$ref": "#/components/schemas/Position3d"
           }
         },
         "additionalProperties": false
@@ -1803,15 +2046,20 @@
         "properties": {
           "x": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "y": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           "z": {
             "type": "number",
-            "format": "float"
+            "format": "double"
+          },
+          "magnitude": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
           }
         },
         "additionalProperties": false
