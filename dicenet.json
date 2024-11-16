@@ -5,68 +5,48 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/discord/channel/v1": {
-      "get": {
+    "/api/certificate/v1": {
+      "post": {
         "tags": [
-          "Channel"
+          "Certificate"
         ],
-        "operationId": "GetChannels",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/UserChannelEntity"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/UserChannelEntity"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/UserChannelEntity"
-                  }
-                }
+        "operationId": "CertificateAssign",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CertificateAssignCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CertificateAssignCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CertificateAssignCommand"
               }
             }
           }
-        }
-      }
-    },
-    "/api/discord/channel/v1/current": {
-      "get": {
-        "tags": [
-          "Channel"
-        ],
-        "operationId": "GetMyChannel",
+        },
         "responses": {
           "200": {
             "description": "Success",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserChannelEntity"
+                  "$ref": "#/components/schemas/CommandResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserChannelEntity"
+                  "$ref": "#/components/schemas/CommandResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserChannelEntity"
+                  "$ref": "#/components/schemas/CommandResult"
                 }
               }
             }
@@ -983,6 +963,64 @@
         }
       }
     },
+    "/api/roll/v1/multiple": {
+      "post": {
+        "tags": [
+          "Roll"
+        ],
+        "operationId": "RollDiceMultiple",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RollData"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RollData"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RollData"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RollResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RollResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RollResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/train/v1": {
       "post": {
         "tags": [
@@ -1032,6 +1070,64 @@
         }
       }
     },
+    "/api/train/v1/multiple": {
+      "post": {
+        "tags": [
+          "Train"
+        ],
+        "operationId": "TrainDiceMultiple",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RollData"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RollData"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RollData"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RollResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RollResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RollResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/train/v1/classify": {
       "post": {
         "tags": [
@@ -1048,6 +1144,13 @@
           },
           {
             "name": "classification",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tag",
             "in": "query",
             "schema": {
               "type": "string"
@@ -1525,6 +1628,54 @@
   },
   "components": {
     "schemas": {
+      "CertificateAssignCommand": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "certificate": {
+            "type": "string",
+            "nullable": true
+          },
+          "key": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CertificateResult": {
+        "type": "object",
+        "properties": {
+          "certificate": {
+            "type": "string",
+            "nullable": true
+          },
+          "key": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Circle3d": {
+        "type": "object",
+        "properties": {
+          "center": {
+            "$ref": "#/components/schemas/Position3d"
+          },
+          "radius": {
+            "type": "number",
+            "format": "double"
+          },
+          "normal": {
+            "$ref": "#/components/schemas/Vector3d"
+          }
+        },
+        "additionalProperties": false
+      },
       "CommandResult": {
         "required": [
           "id",
@@ -1922,6 +2073,20 @@
           },
           "position": {
             "$ref": "#/components/schemas/Position3d"
+          },
+          "circles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Circle3d"
+            },
+            "nullable": true
+          },
+          "northVectors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Vector3d"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1980,28 +2145,6 @@
               "$ref": "#/components/schemas/Reading"
             },
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "UserChannelEntity": {
-        "type": "object",
-        "properties": {
-          "userId": {
-            "type": "string",
-            "nullable": true
-          },
-          "discordUserId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "serverId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "channelId": {
-            "type": "integer",
-            "format": "int64"
           }
         },
         "additionalProperties": false
